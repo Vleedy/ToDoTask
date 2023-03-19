@@ -1,26 +1,29 @@
 import { useState } from 'react';
 import { Input, Button } from 'antd';
-import { useDispatch } from 'react-redux';
+import { useAppDispatch } from '../../hooks/redux';
 import { addToDo } from '../../redux/slices/ToDoSlice';
 import styles from './AddToDo.module.scss';
+
 const { TextArea } = Input;
 
 const AddToDo: React.FC = () => {
-  const dispatch = useDispatch();
-  const [toDo, setToDo] = useState({ name: '', descr: '' });
+  const dispatch = useAppDispatch();
+  const [toDo, setToDo] = useState({ name: '', description: '' });
 
   const addName = (e: React.ChangeEvent<HTMLInputElement>): void => {
     setToDo((item) => ({ ...item, name: e.target.value }));
   };
 
-  const addDescr = (e: React.ChangeEvent<HTMLTextAreaElement>): void => {
-    setToDo((item) => ({ ...item, descr: e.target.value }));
+  const addDescripton = (e: React.ChangeEvent<HTMLTextAreaElement>): void => {
+    setToDo((item) => ({ ...item, description: e.target.value }));
   };
 
   const handleClickAdd = (e: React.FormEvent): void => {
     e.preventDefault();
-    dispatch(addToDo(toDo));
-    setToDo({ name: '', descr: '' });
+    const date: number = new Date().getTime();
+
+    dispatch(addToDo({ ...toDo, date }));
+    setToDo({ name: '', description: '' });
   };
 
   return (
@@ -37,8 +40,8 @@ const AddToDo: React.FC = () => {
         required
         placeholder="Добавьте описание"
         allowClear
-        value={toDo.descr}
-        onChange={(e) => addDescr(e)}
+        value={toDo.description}
+        onChange={(e) => addDescripton(e)}
       />
 
       <Button
@@ -46,7 +49,7 @@ const AddToDo: React.FC = () => {
         type="primary"
         htmlType="submit"
         style={
-          toDo.name === '' || toDo.descr === ''
+          toDo.name === '' || toDo.description === ''
             ? { background: '#d9d9d9' }
             : { background: '#f1dac4' }
         }>
