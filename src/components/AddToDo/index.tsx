@@ -34,6 +34,7 @@ const AddToDo: React.FC = () => {
         allowClear
         value={toDo.name}
         onChange={(e) => addName(e)}
+        maxLength={60}
       />
 
       <TextArea
@@ -42,6 +43,7 @@ const AddToDo: React.FC = () => {
         allowClear
         value={toDo.description}
         onChange={(e) => addDescripton(e)}
+        maxLength={200}
       />
 
       <Button

@@ -20,6 +20,10 @@ h2 {
   height: 90%;
   border-radius: 10px;
   padding: 15px;
+  overflow: auto;
+  &::-webkit-scrollbar {
+    width: 0px;
+  }
   &:first-child {
     width: 61%;
     margin-right: 3%;

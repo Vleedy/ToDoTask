@@ -14,9 +14,11 @@
   }
 }
 .description {
-  word-break: break-all;
   outline: none;
   border: none;
+  background: none;
+  width: 100%;
+  resize: none;
 }
 .icon {
   &:first-child {

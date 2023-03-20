@@ -14,25 +14,28 @@ interface ToDoItemProps {
 const ToDoItem: React.FC<ToDoItemProps> = ({ description, date, i }) => {
   const [editing, setEditing] = React.useState(false);
   const [value, setValue] = React.useState(description);
+  const descriptionRef = React.useRef<HTMLTextAreaElement | null>(null);
   const dispatch = useAppDispatch();
 
   const saveChanges = () => {
-    dispatch(editToDo({ i: i, text: value }));
+    dispatch(editToDo({ i, text: value }));
     setEditing(false);
   };
   const undoChanges = () => {
     setEditing(false);
     setValue(description);
   };
+
+  React.useEffect(() => descriptionRef.current?.focus(), [editing]);
   return (
     <div className={styles.container}>
       <div className={styles.wrapper}>
-        <input
+        <textarea
           className={styles.description}
-          type="text"
           value={value}
-          onChange={(e) => setValue(e.target.value)}
+          onChange={(e) => setValue(e.currentTarget.value)}
           disabled={!editing}
+          ref={descriptionRef}
         />
         <h6 className={styles.date}>{new Date(date).toLocaleDateString()}</h6>
       </div>
