@@ -42,19 +42,26 @@ const ToDoItem: React.FC<ToDoItemProps> = ({ description, date, i }) => {
       <div className={styles.wrapper}>
         {editing ? (
           <>
-            <button onClick={saveChanges} title="Сохранить изменения">
+            <button
+              className={styles.btn}
+              disabled={value === ''}
+              onClick={saveChanges}
+              title={value === '' ? 'Добавьте описание' : 'Сохранить изменения'}>
               <CheckOutlined className={styles.icon} />
             </button>
-            <button onClick={undoChanges} title="Отменить изменения">
+            <button className={styles.btn} onClick={undoChanges} title="Отменить изменения">
               <CloseOutlined className={styles.icon} />
             </button>
           </>
         ) : (
           <>
-            <button onClick={() => setEditing(true)} title="Редактировать описание">
+            <button
+              className={styles.btn}
+              onClick={() => setEditing(true)}
+              title="Редактировать описание">
               <EditOutlined className={styles.icon} />
             </button>
-            <button onClick={() => dispatch(deleteToDo(i))} title="Удалить">
+            <button className={styles.btn} onClick={() => dispatch(deleteToDo(i))} title="Удалить">
               <DeleteOutlined className={styles.icon} />
             </button>
           </>

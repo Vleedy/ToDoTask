@@ -33,9 +33,19 @@
     margin-right: 5px;
   }
   color: rgba($color: #000000, $alpha: 0.2);
+}
+.btn {
   &:hover {
-    color: black;
-    cursor: pointer;
-    transition: 0.5s;
+    .icon {
+      color: black;
+      cursor: pointer;
+      transition: 0.5s;
+    }
+  }
+  &:disabled {
+    .icon {
+      color: rgba($color: #000000, $alpha: 0.2);
+      cursor: default;
+    }
   }
 }
